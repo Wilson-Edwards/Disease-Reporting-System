@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.disease_server_system.mapper.HealthDao">
+  <resultMap id="BaseResultMap" type="com.example.disease_server_system.model.Health">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="my_physical_condition" jdbcType="VARCHAR" property="myPhysicalCondition" />
+    <result column="family_physical_condition" jdbcType="VARCHAR" property="familyPhysicalCondition" />
+    <result column="hu_bei" jdbcType="BIT" property="huBei" />
+    <result column="abroad" jdbcType="BIT" property="abroad" />
+    <result column="foreign_relatives" jdbcType="BIT" property="foreignRelatives" />
+    <result column="contact_case" jdbcType="BIT" property="contactCase" />
+    <result column="contact_foreigner" jdbcType="BIT" property="contactForeigner" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, my_physical_condition, family_physical_condition, hu_bei, abroad, foreign_relatives, 
+    contact_case, contact_foreigner, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from health
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from health
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.disease_server_system.model.Health" useGeneratedKeys="true">
+    insert into health (user_id, my_physical_condition, family_physical_condition, 
+      hu_bei, abroad, foreign_relatives, 
+      contact_case, contact_foreigner, create_time
+      )
+    values (#{userId,jdbcType=INTEGER}, #{myPhysicalCondition,jdbcType=VARCHAR}, #{familyPhysicalCondition,jdbcType=VARCHAR}, 
+      #{huBei,jdbcType=BIT}, #{abroad,jdbcType=BIT}, #{foreignRelatives,jdbcType=BIT}, 
+      #{contactCase,jdbcType=BIT}, #{contactForeigner,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.disease_server_system.model.Health" useGeneratedKeys="true">
+    insert into health
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="myPhysicalCondition != null">
+        my_physical_condition,
+      </if>
+      <if test="familyPhysicalCondition != null">
+        family_physical_condition,
+      </if>
+      <if test="huBei != null">
+        hu_bei,
+      </if>
+      <if test="abroad != null">
+        abroad,
+      </if>
+      <if test="foreignRelatives != null">
+        foreign_relatives,
+      </if>
+      <if test="contactCase != null">
+        contact_case,
+      </if>
+      <if test="contactForeigner != null">
+        contact_foreigner,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="myPhysicalCondition != null">
+        #{myPhysicalCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="familyPhysicalCondition != null">
+        #{familyPhysicalCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="huBei != null">
+        #{huBei,jdbcType=BIT},
+      </if>
+      <if test="abroad != null">
+        #{abroad,jdbcType=BIT},
+      </if>
+      <if test="foreignRelatives != null">
+        #{foreignRelatives,jdbcType=BIT},
+      </if>
+      <if test="contactCase != null">
+        #{contactCase,jdbcType=BIT},
+      </if>
+      <if test="contactForeigner != null">
+        #{contactForeigner,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.disease_server_system.model.Health">
+    update health
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="myPhysicalCondition != null">
+        my_physical_condition = #{myPhysicalCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="familyPhysicalCondition != null">
+        family_physical_condition = #{familyPhysicalCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="huBei != null">
+        hu_bei = #{huBei,jdbcType=BIT},
+      </if>
+      <if test="abroad != null">
+        abroad = #{abroad,jdbcType=BIT},
+      </if>
+      <if test="foreignRelatives != null">
+        foreign_relatives = #{foreignRelatives,jdbcType=BIT},
+      </if>
+      <if test="contactCase != null">
+        contact_case = #{contactCase,jdbcType=BIT},
+      </if>
+      <if test="contactForeigner != null">
+        contact_foreigner = #{contactForeigner,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.disease_server_system.model.Health">
+    update health
+    set user_id = #{userId,jdbcType=INTEGER},
+      my_physical_condition = #{myPhysicalCondition,jdbcType=VARCHAR},
+      family_physical_condition = #{familyPhysicalCondition,jdbcType=VARCHAR},
+      hu_bei = #{huBei,jdbcType=BIT},
+      abroad = #{abroad,jdbcType=BIT},
+      foreign_relatives = #{foreignRelatives,jdbcType=BIT},
+      contact_case = #{contactCase,jdbcType=BIT},
+      contact_foreigner = #{contactForeigner,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
